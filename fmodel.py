@@ -7,6 +7,7 @@ import re
 from optparse import OptionParser, OptionValueError
 
 import numpy as np
+import tools as tl
 
 import glob
 import vtk
@@ -18,11 +19,7 @@ sys.path.append(findbin + '/../lib')
 
 
 # parse command line
-p = OptionParser(usage="""usage: %prog [options] <top_solid> <material_number> <casename> <solid.vtu> <solids.dat> <joint_ele.dat> <out_file.vtu> 
-Assign material properties according to the surfaces given in "solids.dat" file
-
-Write new_*.ele and new_*.ine files
-
+p = OptionParser(usage="""usage: %prog [options] Testing for forces used in CFD+DEM model
 
 """)
 p.add_option("-v", action="store_true", dest="verbose",  help="Verbose")
@@ -44,4 +41,5 @@ p.add_option("-v", action="store_true", dest="verbose",  help="Verbose")
 #   print "Out_vtu must end with .vtu"
 #   sys.exit(2)
 
+tl.run()
 print "DONE"
