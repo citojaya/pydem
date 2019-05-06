@@ -34,7 +34,7 @@ def simulate(count):
         str(round(part.vel[2]/var.velocityFactor,3))+" "+\
         str(round(part.dia*1e3/var.lengthFactor,4))+" 0\n")
  
-    print(var.totalTime/var.timeFactor, 1e3*part.pos[2]/var.lengthFactor)
+    print(round(var.totalTime/var.timeFactor,4), round(1e3*part.pos[2]/var.lengthFactor,3))
     fout.close()
   var.counter += 1
 
