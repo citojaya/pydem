@@ -7,10 +7,13 @@ def checkZContact(part, fc):
     gap = -(var.zMin - part.pos[2]) - part.dia*0.5
     uVec = np.array([0,0,1.0])
     if(gap < 0): #If contact exists calculate contact force
-       fc.surfaceContactForce(part, -gap, uVec)
+        fc.surfaceContactForce(part, -gap, uVec)
+        if(var.incontact == False):
+            fc.esForce(part, gap)
+            var.incontact = True
+    else:
+        var.incontact = False
 
-    if(gap < part.dia):
-        fc.esForce(part, gap)
     if(gap < 100e-9*var.lengthFactor):
         fc.pWallVWForce(part, gap, uVec)
     
@@ -24,6 +27,11 @@ def checkZContact(part, fc):
 
     if(gap < 0): #If contact exists calculate contact force
         fc.surfaceContactForce(part, -gap, uVec)
+        if(var.incontact == False):
+            fc.esForce(part, gap)
+            var.incontact = True
+    else:
+        var.incontact = False
     if(gap < 100.e-9*var.lengthFactor):
         fc.pWallVWForce(part, gap, uVec)
     

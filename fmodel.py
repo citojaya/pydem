@@ -35,16 +35,11 @@ def simulate(count):
         str(round(part.vel[1]/var.velocityFactor,3))+" "+\
         str(round(part.vel[2]/var.velocityFactor,3))+" "+\
         str(round(part.dia*1e3/var.lengthFactor,4))+" 0\n")
-<<<<<<< HEAD
     line = str(round(var.totalTime/var.timeFactor,4))+" "+\
            str(round(1e3*part.pos[2]/var.lengthFactor,3))+" "+\
            str(round(part.charge*1e20,5))
     fout1.write(line+"\n")
     print(line)
-=======
- 
-    print(round(var.totalTime/var.timeFactor,4), round(1e3*part.pos[2]/var.lengthFactor,3))
->>>>>>> d3d9852fb02f40c0155410944964e24064478b91
     fout.close()
     fout1.close()
   var.counter += 1
