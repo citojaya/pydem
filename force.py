@@ -127,22 +127,35 @@ def pWallVWForce(part, vGap, uVec):
   
 def esForce(part, gap):
   # Maximum contact area
-  velMag = np.linalg.norm(part.vel)/var.velocityFactor
-  parR = part.dia*0.5/var.lengthFactor
-  ymod = var.ymod/var.pressureFactor
-  dens = var.dens/var.densityFactor
+  # z0 = part.dia*0.01/var.lengthFactor
+  # velMag = np.linalg.norm(part.vel)/var.velocityFactor
+  # parR = part.dia*0.5/var.lengthFactor
+  # ymod = var.ymod/var.pressureFactor
+
+  z0 = part.dia*0.1
+  velMag = np.linalg.norm(part.vel)
+  parR = part.dia*0.5
+  ymod = var.ymod
+  dens = var.dens
+
+  k0 = z0/(4.*math.pi*var.eps*pow(parR/var.lengthFactor,2)) #constant
+  # print ("k0",k0)
+  S = 1.36*pow((1.0-pow(var.pois,2))/ymod, 2/5)*pow(dens,2/5)*pow(parR*2.0,2)*pow(velMag,4/5)
+  S = S/(var.lengthFactor*var.lengthFactor)
+  part.cntArea = S
+  # vDash = (part.charge*z0)/(4.0*math.pi*var.eps*pow(parR/var.lengthFactor,2)) #(thesis)
+  vDash = k0*part.charge
   
-  S = 1.36*pow((1-pow(var.pois,2))/ymod, 2/5)*pow(dens,2/5)*pow(parR*2,2)*pow(velMag,4/5)
- 
-  vDash = gap/(4.*math.pi*var.eps*pow(parR,2))*part.charge
+  # print("deltaQ, vDash",part.charge,vDash)
+  deltaV = 0.5 #var.Vi - var.Vj - abs(vDash)
+  print("charge, vDash",part.charge,vDash)
+  #deltaQ = var.chargingConst*S*deltaV #(thesis)
+  deltaQ = var.chargingConst*S*deltaV*var.rel_perm*var.eps/z0 #(Matsusaka et al, 2000)
+  
+  # exit(0)
 
-  deltaV = var.Vi - var.Vj - vDash
-  deltaQ = var.chargingConst*S*deltaV
-  print("deltaQ",deltaQ)
-  exit(0)
-
-  # part.charge = deltaQ
-  # print(part.charge)
+  part.charge += deltaQ
+  # print("charge",part.charge)
 
 
 
