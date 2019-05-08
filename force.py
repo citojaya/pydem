@@ -120,46 +120,45 @@ def pWallVWForce(part, vGap, uVec):
     vGap = vGapMn
 
     fv = -var.ha*part.dia*0.5/(6.*vGap*vGap)
+    # print("VANDERWAAL FORCE",fv/var.forceFactor)
 
     part.force[0] += uVec[0]*fv
     part.force[1] += uVec[1]*fv
     part.force[2] += uVec[2]*fv  
 
-def elecForce(part, uVec):
-    eF = 0.0
-    part.force[0] += uVec[0]*eF
-    part.force[1] += uVec[1]*eF
-    part.force[2] += uVec[2]*eF
+def esForce(part, vGap, uVec):
+    gap = max(vGap/var.lengthFactor, 1.0e-3)
+    esF = part.charge*part.charge/(4.0*math.pi*var.eps*gap)
+    # print("ELC FORCE , MG FORCE",esF, part.mass/var.forceFactor)
+    
+    # part.force[0] += uVec[0]*esF
+    # part.force[1] += uVec[1]*esF
+    # part.force[2] += uVec[2]*esF  
 
 def charge(part, gap):
-  # Maximum contact area
-  # z0 = part.dia*0.01/var.lengthFactor
-  # velMag = np.linalg.norm(part.vel)/var.velocityFactor
-  # parR = part.dia*0.5/var.lengthFactor
-  # ymod = var.ymod/var.pressureFactor
-
-  z0 = part.dia*0.1
   velMag = np.linalg.norm(part.vel)
   parR = part.dia*0.5
   ymod = var.ymod
   dens = var.dens
 
-  k0 = z0/(4.*math.pi*var.eps*pow(parR/var.lengthFactor,2)) #constant
-  # print ("k0",k0)
-  S = 1.36*pow((1.0-pow(var.pois,2))/ymod, 2/5)*pow(dens,2/5)*pow(parR*2.0,2)*pow(velMag,4/5)
-  S = S/(var.lengthFactor*var.lengthFactor)
-  part.cntArea = S
-  # vDash = (part.charge*z0)/(4.0*math.pi*var.eps*pow(parR/var.lengthFactor,2)) #(thesis)
-  vDash = k0*part.charge
-  
-  # print("deltaQ, vDash",part.charge,vDash)
-  deltaV = var.Vi - var.Vj - abs(vDash)
-  # print("charge, vDash",part.charge,vDash)
-  #deltaQ = var.chargingConst*S*deltaV #(thesis)
-  deltaQ = var.chargingConst*S*deltaV*var.rel_perm*var.eps/z0 #(Matsusaka et al, 2000)
-  
-  # exit(0)
+  z0 = 1.0e-6
 
+  k0 = z0/(4.*math.pi*var.eps*pow(parR/var.lengthFactor,2)) #constant
+  
+  vDash = k0*part.charge
+
+  emod = (1.0-var.pois*var.pois)/ymod
+  S = 1.36*pow(emod, 2.0/5.0)*pow(dens,2.0/5.0)*pow(parR*2.0,2)*pow(velMag,4.0/5.0)
+  S = S/(var.lengthFactor*var.lengthFactor)
+  
+  part.cntArea = S
+ 
+  deltaV = var.Vi - var.Vj - vDash
+  part.voltage = abs(vDash)
+  
+  # deltaQ = S*deltaV*var.rel_perm*var.eps/z0 #(Matsusaka et al, 2000)
+  deltaQ = var.chargingConst*S*deltaV #(thesis)
+  
   part.charge += deltaQ
   # print("charge",part.charge)
 

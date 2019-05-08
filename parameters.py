@@ -4,7 +4,7 @@ import numpy as np
 counter = 0
 
 # Simulation conditions
-timeStep = 1.0e-6
+timeStep = 1.0e-4
 totalTime = 0.0
 zMin = 0
 zMax = 100.0
@@ -12,13 +12,13 @@ zMax = 100.0
 # Particle property
 sfc = 0.4
 rf = 0.001
-dens = 830.0
+dens = 890.0
 ymod = 1.0e7
-pois = 2.9e-1
-dmpn = 20.0E-4
-ha = 0.0 #6.5e-21
+pois = 5.0e-1
+dmpn = 10.0E-4
+ha = 6.5e-19
 gravity = 9.81
-largestParDia = 2.0e-3
+largestParDia = 31.0e-3
 
 # Fluid property
 fvisc = 1.7894e-05 #(kg/m-s)
@@ -28,10 +28,10 @@ fvel = np.array([0.0,0.0,0.0])
 
 #Electrostatic force parameters
 Vi = 4.7 #Work function of wall (Volt)
-Vj = 4.52 #Work function of particle (Volt)
+Vj = 4.2 #Work function of particle (Volt)
 eps = 8.885e-12 #permitivity of air (C^2/N.m^2)
-rel_perm = 2.5
-chargingConst = 1.e-4 # charging constant (C.m^-2.V^-1)
+rel_perm = 1
+chargingConst = 1.0e-4 # charging constant (C.m^-2.V^-1)
 
 
 refLength = largestParDia

@@ -25,29 +25,21 @@ def simulate(count):
   
   var.totalTime += var.timeStep
   
-#   if(var.incontact):
-#     fout1 = open("particle_charge.dat","a")
-#     line = str(round(var.totalTime/var.timeFactor,5))+" "+\
-#            str(round(1e3*part.pos[2]/var.lengthFactor,3))+" "+\
-#            str(round(part.charge*1e12,5))  
-#     fout1.write(line+"\n")
-#     fout1.close()
-#     print(line)
-
-  if(var.counter%500 == 0):    
+  if(var.counter%50 == 0):
+    
     fout = open("particle.dat", "a")
-    fout.write("TIME = "+str(round(var.totalTime/var.timeFactor,5))+"\n")
-    fout.write(str(round(part.pos[0]*1e3,3))+" "+\
+    fout.write("TIME = "+str(round(var.totalTime/var.timeFactor, 4))+"\n")
+    line = str(round(part.pos[0]*1e3,3))+" "+\
         str(round(part.pos[1]/var.lengthFactor*1e3,3))+" "+\
         str(round(part.pos[2]/var.lengthFactor*1e3,3))+" "+\
         str(round(part.vel[0]/var.velocityFactor,3))+" "+\
         str(round(part.vel[1]/var.velocityFactor,3))+" "+\
         str(round(part.vel[2]/var.velocityFactor,3))+" "+\
-        str(round(part.dia*1e3/var.lengthFactor,4))+" 0\n")  
-    line = str(round(var.totalTime/var.timeFactor,4))+" "+\
-           str(round(1e3*part.pos[2]/var.lengthFactor,3))
-    print(line)
+        str(round(part.dia*1e3/var.lengthFactor,4))
+    fout.write(line+"\n")
+
     fout.close()
+    print(str(round(var.totalTime/var.timeFactor, 4)),str(round(part.pos[2]/var.lengthFactor*1e3,3)))
     
   var.counter += 1
 
@@ -74,7 +66,7 @@ zMax = 100e-3*var.lengthFactor
 
 
 # Set particle center
-part = Particle(np.array([0.0,0.0,3.2e-3*var.lengthFactor]))
+part = Particle(np.array([0.0,0.0,400e-3*var.lengthFactor]))
 # print("Particle center", part.getCenter())
 
 count = 0
