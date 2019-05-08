@@ -18,6 +18,7 @@ import parameters as var
 def simulate(count):
   part.resetForces()
   cn.checkZContact(part, fc)
+  fc.elecForce(part)
 # fc.dragForce(part)
 
   part.move()

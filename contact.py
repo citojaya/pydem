@@ -6,7 +6,7 @@ def checkZContact(part, fc):
     # Contact with zMin
     gap = -(var.zMin - part.pos[2]) - part.dia*0.5
     uVec = np.array([0,0,1.0])
-    if(gap < 0): #If contact exists calculate contact force
+    if(gap < 0): #If contact exist calculate force
         fc.surfaceContactForce(part, -gap, uVec)
         if(part.zMinContact == False):
             fout1 = open("particle_charge.dat","a")
@@ -32,7 +32,7 @@ def checkZContact(part, fc):
     uVec = np.array([0,0,-1.0])
 
     if(gap < part.dia):
-        fc.esForce(part, gap)
+        fc.charge(part, gap)
 
     if(gap < 0): #If contact exists calculate contact force
         fc.surfaceContactForce(part, -gap, uVec)
