@@ -120,6 +120,7 @@ def pWallVWForce(part, vGap, uVec):
     vGap = vGapMn
 
     fv = -var.ha*part.dia*0.5/(6.*vGap*vGap)
+    var.maxVWForce = max(var.maxVWForce,-fv)
     # print("VANDERWAAL FORCE",fv/var.forceFactor)
 
     part.force[0] += uVec[0]*fv
@@ -129,6 +130,7 @@ def pWallVWForce(part, vGap, uVec):
 def esForce(part, vGap, uVec):
     gap = max(vGap/var.lengthFactor, 1.0e-3)
     esF = part.charge*part.charge/(4.0*math.pi*var.eps*gap)
+    var.maxESForce = max(var.maxESForce,esF)
     # print("ELC FORCE , MG FORCE",esF, part.mass/var.forceFactor)
     
     # part.force[0] += uVec[0]*esF

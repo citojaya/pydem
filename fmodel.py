@@ -24,7 +24,7 @@ def simulate(count):
   
   var.totalTime += var.timeStep
   
-  if(var.counter%50 == 0):
+  if(var.counter%500 == 0):
     
     fout = open("particle.dat", "a")
     fout.write("TIME = "+str(round(var.totalTime/var.timeFactor, 4))+"\n")
@@ -38,7 +38,10 @@ def simulate(count):
     fout.write(line+"\n")
 
     fout.close()
-    print(str(round(var.totalTime/var.timeFactor, 4)),str(round(part.pos[2]/var.lengthFactor*1e3,3)))
+    print(str(round(var.totalTime/var.timeFactor, 4)),\
+      str(round(part.pos[2]/var.lengthFactor*1e3,3)),\
+      str(var.maxESForce/var.forceFactor),
+      str(var.maxVWForce/var.forceFactor))
     
   var.counter += 1
 
@@ -65,7 +68,7 @@ zMax = 100e-3*var.lengthFactor
 
 
 # Set particle center
-part = Particle(np.array([0.0,0.0,400e-3*var.lengthFactor]))
+part = Particle(np.array([0.0,0.0,3.0e-3*var.lengthFactor]))
 # print("Particle center", part.getCenter())
 
 count = 0

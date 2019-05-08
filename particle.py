@@ -12,7 +12,7 @@ class Particle:
     angVel = np.array([0.0,0.0,0.0])
     vel = np.array([0.0,0.0,0.0])
 
-    charge = -7.0e-9
+    charge = 0.0e-9
     voltage = 0.0
     zMinContact = False
     zMaxContact = False

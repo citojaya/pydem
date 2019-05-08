@@ -2,9 +2,12 @@ import math
 import numpy as np
 
 counter = 0
+# Max values
+maxVWForce = 0.0
+maxESForce = 0.0
 
 # Simulation conditions
-timeStep = 1.0e-4
+timeStep = 5.0e-7
 totalTime = 0.0
 zMin = 0
 zMax = 100.0
@@ -12,13 +15,13 @@ zMax = 100.0
 # Particle property
 sfc = 0.4
 rf = 0.001
-dens = 890.0
+dens = 830.0
 ymod = 1.0e7
 pois = 5.0e-1
-dmpn = 10.0E-4
-ha = 6.5e-19
+dmpn = 10.0E-5
+ha = 6.5e-20
 gravity = 9.81
-largestParDia = 31.0e-3
+largestParDia = 140.0e-6
 
 # Fluid property
 fvisc = 1.7894e-05 #(kg/m-s)
