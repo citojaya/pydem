@@ -18,30 +18,37 @@ import parameters as var
 def simulate(count):
   part.resetForces()
   cn.checkZContact(part, fc)
+  fc.elecForce(part)
 # fc.dragForce(part)
 
   part.move()
   
   var.totalTime += var.timeStep
   
-  if(var.counter%500 == 0):
-    fout1 = open("particle_charge.dat","a")
+#   if(var.incontact):
+#     fout1 = open("particle_charge.dat","a")
+#     line = str(round(var.totalTime/var.timeFactor,5))+" "+\
+#            str(round(1e3*part.pos[2]/var.lengthFactor,3))+" "+\
+#            str(round(part.charge*1e12,5))  
+#     fout1.write(line+"\n")
+#     fout1.close()
+#     print(line)
+
+  if(var.counter%500 == 0):    
     fout = open("particle.dat", "a")
-    fout.write("TIME = "+str(var.totalTime)+"\n")
+    fout.write("TIME = "+str(round(var.totalTime/var.timeFactor,5))+"\n")
     fout.write(str(round(part.pos[0]*1e3,3))+" "+\
         str(round(part.pos[1]/var.lengthFactor*1e3,3))+" "+\
         str(round(part.pos[2]/var.lengthFactor*1e3,3))+" "+\
         str(round(part.vel[0]/var.velocityFactor,3))+" "+\
         str(round(part.vel[1]/var.velocityFactor,3))+" "+\
         str(round(part.vel[2]/var.velocityFactor,3))+" "+\
-        str(round(part.dia*1e3/var.lengthFactor,4))+" 0\n")
+        str(round(part.dia*1e3/var.lengthFactor,4))+" 0\n")  
     line = str(round(var.totalTime/var.timeFactor,4))+" "+\
-           str(round(1e3*part.pos[2]/var.lengthFactor,3))+" "+\
-           str(round(part.charge*1e20,5))
-    fout1.write(line+"\n")
+           str(round(1e3*part.pos[2]/var.lengthFactor,3))
     print(line)
     fout.close()
-    fout1.close()
+    
   var.counter += 1
 
   

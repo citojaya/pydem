@@ -124,8 +124,14 @@ def pWallVWForce(part, vGap, uVec):
     part.force[0] += uVec[0]*fv
     part.force[1] += uVec[1]*fv
     part.force[2] += uVec[2]*fv  
-  
-def esForce(part, gap):
+
+def elecForce(part, uVec):
+    eF = 0.0
+    part.force[0] += uVec[0]*eF
+    part.force[1] += uVec[1]*eF
+    part.force[2] += uVec[2]*eF
+
+def charge(part, gap):
   # Maximum contact area
   # z0 = part.dia*0.01/var.lengthFactor
   # velMag = np.linalg.norm(part.vel)/var.velocityFactor
@@ -147,8 +153,8 @@ def esForce(part, gap):
   vDash = k0*part.charge
   
   # print("deltaQ, vDash",part.charge,vDash)
-  deltaV = 0.5 #var.Vi - var.Vj - abs(vDash)
-  print("charge, vDash",part.charge,vDash)
+  deltaV = var.Vi - var.Vj - abs(vDash)
+  # print("charge, vDash",part.charge,vDash)
   #deltaQ = var.chargingConst*S*deltaV #(thesis)
   deltaQ = var.chargingConst*S*deltaV*var.rel_perm*var.eps/z0 #(Matsusaka et al, 2000)
   

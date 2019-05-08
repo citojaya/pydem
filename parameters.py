@@ -30,6 +30,7 @@ fvel = np.array([0.0,0.0,0.0])
 Vi = 4.7 #Work function of wall (Volt)
 Vj = 4.52 #Work function of particle (Volt)
 eps = 8.885e-12 #permitivity of air (C^2/N.m^2)
+rel_perm = 2.5
 chargingConst = 1.e-4 # charging constant (C.m^-2.V^-1)
 
 
