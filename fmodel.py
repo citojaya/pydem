@@ -18,7 +18,7 @@ import parameters as var
 def simulate(count):
   part.resetForces()
   cn.checkZContact(part, fc)
-  fc.elecForce(part)
+  # fc.elecForce(part)
 # fc.dragForce(part)
 
   part.move()
@@ -29,20 +29,20 @@ def simulate(count):
     
     fout = open("particle.dat", "a")
     fout.write("TIME = "+str(round(var.totalTime/var.timeFactor, 4))+"\n")
-    line = str(round(part.pos[0]*1e3,3))+" "+\
-        str(round(part.pos[1]/var.lengthFactor*1e3,3))+" "+\
-        str(round(part.pos[2]/var.lengthFactor*1e3,3))+" "+\
-        str(round(part.vel[0]/var.velocityFactor,3))+" "+\
-        str(round(part.vel[1]/var.velocityFactor,3))+" "+\
-        str(round(part.vel[2]/var.velocityFactor,3))+" "+\
+    line = str(round(part.pos[0]*1e3,4))+" "+\
+        str(round(part.pos[1]/var.lengthFactor*1e3,4))+" "+\
+        str(round(part.pos[2]/var.lengthFactor*1e3,4))+" "+\
+        str(round(part.vel[0]/var.velocityFactor,4))+" "+\
+        str(round(part.vel[1]/var.velocityFactor,4))+" "+\
+        str(round(part.vel[2]/var.velocityFactor,4))+" "+\
         str(round(part.dia*1e3/var.lengthFactor,4))
     fout.write(line+"\n")
 
     fout.close()
     print(str(round(var.totalTime/var.timeFactor, 4)),\
-      str(round(part.pos[2]/var.lengthFactor*1e3,3)),\
-      str(var.maxESForce/var.forceFactor),
-      str(var.maxVWForce/var.forceFactor))
+      str(round(part.pos[2]/var.lengthFactor*1e3,4)),\
+      str(round(var.maxESForce*1e15/var.forceFactor,4)),
+      str(round(var.maxVWForce*1e9/var.forceFactor,4)))
     
   var.counter += 1
 
