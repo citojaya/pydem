@@ -162,6 +162,7 @@ def charge(part, gap):
   deltaQ = var.chargingConst*S*deltaV #(thesis)
   
   part.charge += deltaQ
+  var.maxCharge = part.charge
   # print("charge",part.charge)
 
 

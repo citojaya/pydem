@@ -42,7 +42,8 @@ def simulate(count):
     print(str(round(var.totalTime/var.timeFactor, 4)),\
       str(round(part.pos[2]/var.lengthFactor*1e3,4)),\
       str(round(var.maxESForce*1e15/var.forceFactor,4)),
-      str(round(var.maxVWForce*1e9/var.forceFactor,4)))
+      str(round(var.maxVWForce*1e9/var.forceFactor,4)),
+      str(round(var.maxCharge*1e15,8)))
     
   var.counter += 1
 

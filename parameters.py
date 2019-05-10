@@ -5,6 +5,7 @@ counter = 0
 # Max values
 maxVWForce = 0.0
 maxESForce = 0.0
+maxCharge = 0.0
 
 # Simulation conditions
 timeStep = 5.0e-7
